@@ -10,16 +10,22 @@
             columns={columns}
         >
        </lightning-datatable>
+
+       <template for:each={programmed.data} for:item="program_movie">
+        <div class="container" key={program_movie.Id}>
+            <a key={program_movie.Id} onclick={program_click}>
+                {program_movie.Room__r.Name__c} - {program_movie.Room__r.Seats__c} - {program_movie.Movie__r.Title__c} : {program_movie.Date__c} - {program_movie.ListSeatsTaken__c}
+            </a>
+        </div>
+           
+    </template>
     </template>
     <template if:false={programmed.data}>
-        NO DATA
+        Nessuna programmazione trovata
     </template>
     <template if:true={programmed.error}>
-        GOT ERROR
+        GOT ERRORS:
         {programmed.error}
-    </template>
-    <template if:false={programmed.error}>
-        NO ERROR
     </template>
 
 

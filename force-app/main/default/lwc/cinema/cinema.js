@@ -21,7 +21,7 @@ const COLUMNS = [
     { label: 'N2', fieldName: NAME_ROOM_FIELD3.fieldApiName, type: 'text' },
     { label: 'Date__c', fieldName: DATE_FIELD.fieldApiName, type: 'datetime' },
     { label: 'Date__c2', fieldName: 'Room__c', type: 'text' },
-    { label: 'Date__c3', fieldName: 'Room__r', type: 'object' },
+    { label: 'Date__c3', fieldName: 'Room__r.Name__c', type: 'text' },
     { label: 'Seats Taken', fieldName: LIST_SEATS_TAKEN_FIELD.fieldApiName, type: 'text' }
 ];
 
@@ -38,7 +38,7 @@ export default class Cinema extends LightningElement {
         console.log("JSON.stringify===> "+ JSON.stringify(data[0].Room__c));
         console.log("JSON.stringify===> "+ JSON.stringify(data[0]));
         console.log("JSON.stringify===> "+ JSON.stringify(data[0].Room__r));
-        console.log("JSON.stringify===> "+ JSON.stringify(data[0].Room__r.Room__c));
+        console.log("JSON.stringify===> "+ JSON.stringify(data[0].Room__r.Name__c));
      } else if(error){
         console.log(error);
       }
@@ -82,4 +82,22 @@ export default class Cinema extends LightningElement {
         return getFieldValue(this.account.data, REVENUE_FIELD);
     }
     
+
+    program_click(event) {
+        /*
+        const event = new CustomEvent('tileclick', {
+            // detail contains only primitives
+            detail: this.product.fields.Id.value
+        });
+        // Fire the event from c-tile
+        this.dispatchEvent(event);
+        */
+        console.log(event);
+        const toastEvent = new ShowToastEvent({
+            title: "Account created",
+            message: "seats: " + event,
+            variant: "success"
+        });
+        this.dispatchEvent(toastEvent);
+    }
 }

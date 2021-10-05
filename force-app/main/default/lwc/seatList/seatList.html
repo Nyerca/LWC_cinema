@@ -2,11 +2,10 @@
     <div class="container">
         Room: {roomName}
         <template for:each={seats} for:item="seat">
-            <c-seat 
+            <lightning-button
                 key={seat.fields.Id.value} 
-                seat={seat} 
                 ontileclick={handleSeatClick}>
-            </c-seat>
+            </lightning-button>
         </template>
     </div>
 </template>
