@@ -1,0 +1,12 @@
+{
+  "packageDirectories": [
+    {
+      "path": "force-app",
+      "default": true
+    }
+  ],
+  "name": "cinema",
+  "namespace": "",
+  "sfdcLoginUrl": "https://cunning-panda-5ryjbn-dev-ed.my.salesforce.com/",
+  "sourceApiVersion": "52.0"
+}
