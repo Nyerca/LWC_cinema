@@ -1,10 +1,16 @@
 <template>
     <div class="container">
-        Room: {roomName}
-        <template for:each={seats} for:item="seat">
+        
+        <template for:each={seatSeatWithVariant} for:item="seat">
+            
             <lightning-button
-                key={seat.fields.Id.value} 
-                ontileclick={handleSeatClick}>
+                key={seat.num}
+                label={seat.num}
+                data-seatnumber={seat.num}
+                class="slds-m-left_x-small"
+                variant={seat.colour}
+                onclick={seatClick}>
+                
             </lightning-button>
         </template>
     </div>

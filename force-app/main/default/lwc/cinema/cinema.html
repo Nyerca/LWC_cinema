@@ -1,24 +1,27 @@
 <template>
     CINEMA
-    <header class="header">Available Bikes for {name}</header>
-    <header class="header">Available Bikes for {revenue}</header>
-    errors: {errors}
+    
+    
     <template if:true={programmed.data}>
-        <lightning-datatable
-            key-field="Id"
-            data={programmed.data}
-            columns={columns}
-        >
-       </lightning-datatable>
-
+        
        <template for:each={programmed.data} for:item="program_movie">
         <div class="container" key={program_movie.Id}>
-            <a key={program_movie.Id} onclick={program_click}>
+            <a key={program_movie.Id} onclick={program_click} data-seats={program_movie.Room__r.Seats__c} data-seatstaken={program_movie.ListSeatsTaken__c}>
                 {program_movie.Room__r.Name__c} - {program_movie.Room__r.Seats__c} - {program_movie.Movie__r.Title__c} : {program_movie.Date__c} - {program_movie.ListSeatsTaken__c}
             </a>
         </div>
            
     </template>
+    <template if:true={openRoom}>
+        OPEEEEEEEEEEEEEEEEEEEN ROOOOOOOOOOOOOOM
+        <c-seat-list seats={_seats_list} seatsused={_seatstaken_list} onseatclick={handleSeatClick}></c-seat-list>
+    </template>
+
+    <template if:true={_seatClicked}>
+        <c-seat seatnumber={_seatClicked} onseattaken={handleSeatTaken} taken={_isTaken}></c-seat>
+    </template>
+    
+
     </template>
     <template if:false={programmed.data}>
         Nessuna programmazione trovata
@@ -27,13 +30,11 @@
         GOT ERRORS:
         {programmed.error}
     </template>
+    <template if:true={errors}>
+        errors: {errors}
+    </template>
 
 
-    <lightning-record-form
-            object-api-name={objectApiName}
-            fields={fields}
-            onsuccess={handleSuccess}>
-        </lightning-record-form>
-
+    
 
 </template>

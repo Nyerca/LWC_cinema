@@ -1,8 +1,9 @@
 <template>
-    <div if:true={taken}>
-        <p>Seat taken</p>
-    </div>
-    <div id="waiting" if:false={taken}>
-        <lightning-button variant="brand" label="Submit" title="Submit" type="submit"></lightning-button>
-    </div>
+    SEAT
+    <template if:true={taken}>
+        <p>Seat {seatnumber} taken</p>
+    </template>
+    <template id="waiting" if:false={taken}>
+        <lightning-button variant="brand" label={label} title="Submit" onclick={clickBtn}></lightning-button>
+    </template>
 </template>

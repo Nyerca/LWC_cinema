@@ -1,23 +1,27 @@
-import { LightningElement, api } from 'lwc';
+import { LightningElement, api, track } from 'lwc';
 
 export default class Seat extends LightningElement {
 
-    // Ensure changes are reactive when product is updated
-    taken;
+    @api seatnumber;
+    @api taken;
 
-    // Private var to track @api productId
-    _seatId = undefined;
-
-    // Use set and get to process the value every time it's
-    // requested while switching between products
-    set seatId(value) {
-        this._seatId = value;
-        this.taken = true;
+    get isTaken() {
+        console.log("IS TAKEN: " + this.taken);
+        return this.taken == true ? true : undefined;
     }
-    
-    // getter for productId
-    @api get seatId(){
-        return this._seatId;
+
+    get label() {
+        return "Take seat num." + this.seatnumber;
+    }
+
+    clickBtn(evt) {
+        // This component wants to emit a seatselected event to its parent
+        //this.taken = true;
+        const event = new CustomEvent('seattaken', {
+            detail: this.seatnumber
+        });
+        // Fire the event from c-list
+        this.dispatchEvent(event);
     }
 
 
